@@ -1,0 +1,13 @@
+*-debug.log
+*-error.log
+.idea
+/.nyc_output
+/dist
+/lib
+/tmp
+/yarn.lock
+dist
+node_modules
+coverage
+.vscode
+*.tsbuildinfo

@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "@types", "dist", "**/__tests__/**", "**/__mocks__/**", "**/*.test.ts"]
+}

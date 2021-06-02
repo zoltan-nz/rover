@@ -1,0 +1,60 @@
+{
+  "name": "rover",
+  "version": "1.0.0",
+  "description": "Control your Mars Rover from your CLI",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "rover": "dist/bin/cli.js"
+  },
+  "repository": "git@github.com:zoltan-nz/mars-rover-code-challenge.git",
+  "author": "Zoltan <zdebre@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=12.9",
+    "yarn": ">=1.22.10"
+  },
+  "scripts": {
+    "clean": "tsc -b . --clean && del ./dist ./.cache ./coverage ./*.tsbuildinfo",
+    "build": "tsc",
+    "build:prod": "tsc --build ./tsconfig.prod.json",
+    "deploy": "yarn && run-s clean test build:prod && chmod +x $(pwd)/dist/bin/cli.js && yarn global add file:$(pwd)",
+    "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "yarn lint:check --fix",
+    "format:check": "prettier --list-different '**/*.{ts,tsx,js,jsx,json,md,html,scss,css}' 'src/bin/cli.ts'",
+    "format": "yarn format:check --write",
+    "start": "node -r ts-node/register src/bin/cli.ts",
+    "start:debug": "ndb node -r ts-node/register --inspect-brk=5100 src/bin/cli.ts",
+    "start:prod": "node ./dist/bin/rover.js",
+    "test": "jest --colors --coverage",
+    "test:watch": "jest --colors --watch",
+    "postinstall": "husky install",
+    "verify": "run-p format:check lint:check test build"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.6.2",
+    "@types/yargs": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "@types/inquirer": "^7.3.1",
+    "del-cli": "^3.0.1",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "husky": "^6.0.0",
+    "jest": "^27.0.3",
+    "mock-stdin": "^1.0.0",
+    "ndb": "^1.1.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.0",
+    "ts-jest": "^27.0.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "inquirer": "^8.1.0",
+    "tslib": "^2.2.0",
+    "yargs": "^17.0.1"
+  }
+}
